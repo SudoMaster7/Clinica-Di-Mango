@@ -1084,14 +1084,16 @@
             // Formatar data para a mensagem
             const dateFormatted = new Date(funnelData.date).toLocaleDateString('pt-BR');
 
-            const message = `*Olá! Vim pelo site da Clínica Di Mango* 🏥
+            const message = `Olá! Vim pelo site da *Clínica Di Mango*
 
-👤 *Paciente:* ${funnelData.name}
-🩺 *Interesse:* ${funnelData.service}
-📅 *Dia:* ${dateFormatted}
-🕒 *Horário:* ${funnelData.time}
+*DADOS DO AGENDAMENTO:*
 
-Gostaria de verificar a disponibilidade. Obrigado!`;
+*Paciente:* ${funnelData.name}
+*Serviço:* ${funnelData.service}
+*Data Preferida:* ${dateFormatted}
+*Horário:* ${funnelData.time}
+
+Gostaria de verificar a disponibilidade para agendamento. Obrigado!`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
         }
