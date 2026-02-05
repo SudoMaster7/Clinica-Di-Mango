@@ -146,15 +146,23 @@
 
         .logo {
             text-align: center;
-            font-size: 1.75rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            animation: shimmer 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.3));
+            transition: var(--transition);
+        }
+
+        .logo img:hover {
+            filter: drop-shadow(0 4px 16px rgba(37, 99, 235, 0.5));
+            transform: scale(1.05);
         }
 
         @keyframes shimmer {
@@ -743,7 +751,9 @@
 
     <!-- HEADER -->
     <header class="header">
-        <div class="logo">CLÍNICA DI MANGO</div>
+        <div class="logo">
+            <img src="logo.png" alt="Clínica Di Mango">
+        </div>
     </header>
 
     <!-- CONTAINER DO FUNIL -->
