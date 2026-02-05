@@ -840,6 +840,11 @@
             </div>
 
             <div class="form-group">
+                <label class="form-label">Dia Preferido</label>
+                <input type="date" class="form-input" id="userDate" required>
+            </div>
+
+            <div class="form-group">
                 <label class="form-label">Preferência de Horário</label>
                 <select class="form-select" id="userTime">
                     <option value="Tarde">Tarde (13h - 18h)</option>
@@ -904,6 +909,7 @@
             category: '',
             service: '',
             name: '',
+            date: '',
             time: ''
         };
 
@@ -945,6 +951,7 @@
 
             if (stepNumber === 5) {
                 const name = document.getElementById('userName').value.trim();
+                const date = document.getElementById('userDate').value;
                 const time = document.getElementById('userTime').value;
 
                 if (!name) {
@@ -952,7 +959,13 @@
                     return;
                 }
 
+                if (!date) {
+                    alert('Por favor, selecione o dia preferido.');
+                    return;
+                }
+
                 funnelData.name = name;
+                funnelData.date = date;
                 funnelData.time = time;
                 renderSummary();
             }
@@ -1039,6 +1052,10 @@
         // ========== RENDERIZAR RESUMO ==========
         function renderSummary() {
             const summary = document.getElementById('dataSummary');
+
+            // Formatar data para melhor exibição
+            const dateFormatted = new Date(funnelData.date).toLocaleDateString('pt-BR');
+
             summary.innerHTML = `
                 <div class="data-row">
                     <span class="data-label">👤 Paciente:</span>
@@ -1047,6 +1064,10 @@
                 <div class="data-row">
                     <span class="data-label">🩺 Serviço:</span>
                     <span class="data-value">${funnelData.service}</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">📅 Dia:</span>
+                    <span class="data-value">${dateFormatted}</span>
                 </div>
                 <div class="data-row">
                     <span class="data-label">🕒 Horário:</span>
@@ -1060,10 +1081,14 @@
             // ⚠️ SUBSTITUA PELO NÚMERO REAL DA CLÍNICA (formato: 5521999999999)
             const phoneNumber = "5521967027021";
 
+            // Formatar data para a mensagem
+            const dateFormatted = new Date(funnelData.date).toLocaleDateString('pt-BR');
+
             const message = `*Olá! Vim pelo site da Clínica Di Mango* 🏥%0A%0A` +
                 `👤 *Paciente:* ${funnelData.name}%0A` +
                 `🩺 *Interesse:* ${funnelData.service}%0A` +
-                `🕒 *Preferência:* ${funnelData.time}%0A%0A` +
+                `📅 *Dia:* ${dateFormatted}%0A` +
+                `🕒 *Horário:* ${funnelData.time}%0A%0A` +
                 `Gostaria de verificar a disponibilidade. Obrigado!`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
