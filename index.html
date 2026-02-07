@@ -4,1093 +4,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agende sua Consulta | Clínica Di Mango</title>
+    <title>Agendamento | Clínica Di Mango</title>
     <meta name="description" content="Recupere sua qualidade de vida com especialistas da Clínica Di Mango">
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="clinica di mango.png">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================
-           VARIÁVEIS - MODO CLARO E ESCURO
+           VARIÁVEIS E TEMAS
         ============================================ */
         :root {
-            /* Modo Claro - Tons de Azul */
-            --primary: #003366;
-            --primary-light: #0056b3;
+            --primary: #004aad;
+            --primary-light: #3a86ff;
             --secondary: #2563eb;
-            --accent-sky: #60a5fa;
-            --accent-cyan: #06b6d4;
-            --whatsapp: #25D366;
-
-            --bg-gradient-1: #f0f9ff;
-            --bg-gradient-2: #dbeafe;
-            --bg-body: linear-gradient(135deg, #f0f9ff 0%, #dbeafe 50%, #e0f2fe 100%);
-
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
-
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.8);
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --header-bg: rgba(255, 255, 255, 0.95);
-
-            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
-            --shadow-glow: 0 0 30px rgba(37, 99, 235, 0.3);
-
-            --border-radius: 24px;
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --accent: #06b6d4;
+            --whatsapp: #22c55e;
+            
+            --bg-body: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            
+            --text-main: #1e293b;
+            --text-sub: #475569;
+            
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            
+            --radius: 20px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="dark"] {
-            /* Modo Escuro - Tons de Azul */
+            --bg-body: #0f172a;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --text-main: #f8fafc;
+            --text-sub: #cbd5e1;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --primary: #60a5fa;
-            --primary-light: #93c5fd;
-            --secondary: #3b82f6;
-            --accent-sky: #7dd3fc;
-            --accent-cyan: #22d3ee;
-
-            --bg-gradient-1: #0f172a;
-            --bg-gradient-2: #1e3a8a;
-            --bg-body: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e40af 100%);
-
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-muted: #64748b;
-
-            --glass-bg: rgba(15, 23, 42, 0.7);
-            --glass-border: rgba(148, 163, 184, 0.2);
-            --card-bg: rgba(30, 41, 59, 0.8);
-            --header-bg: rgba(15, 23, 42, 0.95);
-
-            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
-            --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.4);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ============================================
+           RESET E BASE
+        ============================================ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-gradient);
             background-attachment: fixed;
+            color: var(--text-main);
             min-height: 100vh;
-            color: var(--text-primary);
+            line-height: 1.6;
             overflow-x: hidden;
             transition: var(--transition);
         }
 
         /* ============================================
-           TOGGLE DARK/LIGHT MODE
-        ============================================ */
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 1000;
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 0.5rem;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .theme-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: var(--transition);
-            background: transparent;
-        }
-
-        .theme-btn.active {
-            background: linear-gradient(135deg, var(--secondary), var(--accent-cyan));
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-        }
-
-        /* ============================================
-           HEADER COM LOGO E GRADIENTE
+           UI COMPONENTS (Header, Toggle, Progress)
         ============================================ */
         .header {
-            background: var(--header-bg);
-            backdrop-filter: blur(20px);
-            padding: 1.5rem 1rem;
-            box-shadow: var(--shadow-sm);
+            padding: 1rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--glass-border);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid var(--glass-border);
-            transition: var(--transition);
         }
 
-        .logo {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .header img { height: 50px; transition: var(--transition); }
 
-        .logo img {
-            height: 60px;
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.3));
-            transition: var(--transition);
-        }
-
-        .logo img:hover {
-            filter: drop-shadow(0 4px 16px rgba(37, 99, 235, 0.5));
-            transform: scale(1.05);
-        }
-
-        @keyframes shimmer {
-
-            0%,
-            100% {
-                filter: hue-rotate(0deg);
-            }
-
-            50% {
-                filter: hue-rotate(20deg);
-            }
-        }
-
-        /* ============================================
-           CONTAINER PRINCIPAL DO FUNIL
-        ============================================ */
-        .funnel-container {
-            max-width: 650px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            position: relative;
-        }
-
-        /* ============================================
-           BARRA DE PROGRESSO COM GRADIENTE
-        ============================================ */
-        .progress-bar {
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
             background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 100px;
-            height: 10px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            border-radius: 50px;
             border: 1px solid var(--glass-border);
+            display: flex;
+            gap: 5px;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-btn {
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+            filter: grayscale(1);
+        }
+
+        .theme-btn.active { background: var(--primary); filter: grayscale(0); }
+
+        .funnel-container {
+            max-width: 550px;
+            margin: 2rem auto;
+            padding: 0 1.5rem 5rem;
+        }
+
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--glass-border);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent-sky), var(--accent-cyan));
-            background-size: 200% 100%;
-            width: 20%;
-            transition: width 0.6s ease;
-            border-radius: 100px;
-            animation: gradientFlow 3s ease infinite;
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
-        }
-
-        @keyframes gradientFlow {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         /* ============================================
-           ETAPAS (STEPS) - GLASSMORPHISM AVANÇADO
+           CARDS E ETAPAS
         ============================================ */
         .step {
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px) saturate(180%);
-            border-radius: var(--border-radius);
-            padding: 2.5rem 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--glass-border);
             display: none;
-            opacity: 0;
-            transform: translateX(30px) scale(0.98);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .step::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .step.active {
-            display: block;
-            animation: slideIn 0.6s forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0) scale(1);
-            }
-        }
-
-        .step-title {
-            font-size: 1.75rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-            position: relative;
-            z-index: 1;
-        }
-
-        .step-subtitle {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.5;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ============================================
-           ETAPA 1: VÍDEO COM EFEITO NEON
-        ============================================ */
-        .video-container {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-lg);
-            border: 2px solid var(--glass-border);
-        }
-
-        .video-container::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 20px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent-sky), var(--accent-cyan));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.6;
-            animation: borderGlow 3s ease infinite;
-            pointer-events: none;
-        }
-
-        @keyframes borderGlow {
-
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        .video-container video {
-            width: 100%;
-            height: auto;
-            display: block;
-            background: #000;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-cyan) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
             padding: 2rem;
-            animation: gradientShift 5s ease infinite;
-        }
-
-        @keyframes gradientShift {
-
-            0%,
-            100% {
-                filter: hue-rotate(0deg);
-            }
-
-            50% {
-                filter: hue-rotate(30deg);
-            }
-        }
-
-        /* ============================================
-           BOTÕES COM TRANSPARÊNCIA E GRADIENTES
-        ============================================ */
-        .btn {
-            width: 100%;
-            padding: 1.1rem 2rem;
-            border: none;
-            border-radius: 16px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            z-index: 1;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: inherit;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .btn:hover::before {
-            opacity: 0.2;
-        }
-
-        /* Botão Primário - Glassmorphism com Gradiente */
-        .btn-primary {
-            background: linear-gradient(135deg,
-                    rgba(0, 51, 102, 0.9),
-                    rgba(37, 99, 235, 0.9),
-                    rgba(6, 182, 212, 0.9));
-            color: white;
-            box-shadow: var(--shadow-glow);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            animation: pulse 2.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
-            }
-
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 0 40px rgba(37, 99, 235, 0.6);
-            }
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.5);
-        }
-
-        /* Botão WhatsApp - Gradiente Verde com Glow */
-        .btn-whatsapp {
-            background: linear-gradient(135deg,
-                    rgba(37, 211, 102, 0.95),
-                    rgba(34, 197, 94, 0.95));
-            color: white;
-            font-size: 1.25rem;
-            font-weight: 700;
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .btn-whatsapp:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
-            background: linear-gradient(135deg,
-                    rgba(34, 197, 94, 0.95),
-                    rgba(37, 211, 102, 0.95));
-        }
-
-        /* Botão Voltar - Transparente */
-        .btn-back {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-back:hover {
-            background: var(--card-bg);
-            transform: translateX(-5px);
-        }
-
-        /* ============================================
-           GRID DE CATEGORIAS - CARDS MESCLADOS
-        ============================================ */
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .option-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px) saturate(150%);
-            border: 2px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg,
-                    rgba(37, 99, 235, 0.1),
-                    rgba(96, 165, 250, 0.1),
-                    rgba(6, 182, 212, 0.1));
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .option-card:hover::before {
-            opacity: 1;
-        }
-
-        .option-card:hover {
-            border-color: var(--secondary);
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .option-card.selected {
-            background: linear-gradient(135deg,
-                    rgba(37, 99, 235, 0.2),
-                    rgba(6, 182, 212, 0.2));
-            border: 3px solid var(--secondary);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .option-icon {
-            font-size: 2.8rem;
-            margin-bottom: 0.75rem;
-            filter: drop-shadow(0 4px 8px rgba(37, 99, 235, 0.3));
-            transition: var(--transition);
-        }
-
-        .option-card:hover .option-icon {
-            transform: scale(1.15) rotate(5deg);
-        }
-
-        .option-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1.3;
-        }
-
-        /* ============================================
-           FEEDBACK VISUAL - CARD COLORIDO
-        ============================================ */
-        .service-feedback {
-            background: linear-gradient(135deg,
-                    rgba(37, 99, 235, 0.15),
-                    rgba(6, 182, 212, 0.15));
-            backdrop-filter: blur(20px);
-            border-left: 4px solid var(--secondary);
-            border-radius: 16px;
-            padding: 1.25rem;
-            margin-bottom: 2rem;
-            display: none;
-            animation: fadeIn 0.4s ease;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-md);
-            position: relative;
-            z-index: 1;
-        }
-
-        .service-feedback.show {
-            display: block;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease forwards;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .service-feedback-title {
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
+        .step.active { display: block; }
 
-        .service-feedback-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
+        .step-title { font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 800; letter-spacing: -0.5px; }
+        .step-subtitle { color: var(--text-sub); margin-bottom: 2rem; font-size: 0.95rem; }
 
-        /* ============================================
-           FORMULÁRIO DE DADOS
-        ============================================ */
-        .form-group {
+        /* Estilo Video */
+        .video-box {
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
             margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary);
         }
 
-        .form-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+        /* Grid de Opções */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .form-input,
-        .form-select {
-            width: 100%;
-            padding: 1rem;
+        .option-card {
+            background: rgba(255, 255, 255, 0.05);
             border: 2px solid var(--glass-border);
-            border-radius: 14px;
-            font-size: 1rem;
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option-card:hover { 
+            border-color: var(--primary); 
+            transform: translateY(-5px);
+            background: var(--glass-bg);
+        }
+
+        .option-card.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .option-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+
+        /* Inputs */
+        .form-group { margin-bottom: 1.2rem; }
+        .form-label { display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 2px solid var(--glass-border);
+            background: var(--glass-bg);
+            color: var(--text-main);
             font-family: inherit;
             transition: var(--transition);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            color: var(--text-primary);
         }
+        .form-input:focus { outline: none; border-color: var(--primary); }
 
-        .form-input:focus,
-        .form-select:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
-            background: var(--card-bg);
-        }
-
-        .form-select option {
-            background: var(--card-bg);
-            color: var(--text-primary);
-        }
-
-        /* ============================================
-           TELA DE CONVERSÃO FINAL
-        ============================================ */
-        .conversion-content {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .conversion-icon {
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-            animation: bounce 2s ease-in-out infinite;
-            filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.4));
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .conversion-title {
-            font-size: 1.8rem;
+        /* Botões */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .conversion-subtitle {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); }
+        .btn-primary:hover { opacity: 0.9; transform: scale(1.02); }
+
+        .btn-back { background: transparent; color: var(--text-sub); font-size: 0.85rem; }
+
+        .btn-whatsapp { 
+            background: var(--whatsapp); 
+            color: white; 
+            font-size: 1.1rem;
+            animation: pulse 2s infinite;
         }
 
-        .data-summary {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        /* Resumo Final */
+        .summary-box {
+            background: rgba(0, 0, 0, 0.05);
             padding: 1.5rem;
+            border-radius: 12px;
             margin-bottom: 2rem;
             text-align: left;
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-md);
         }
+        .summary-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
+        .summary-item b { color: var(--primary); }
 
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.9rem 0;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .data-row:last-child {
-            border-bottom: none;
-        }
-
-        .data-label {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .data-value {
-            color: var(--text-secondary);
-            text-align: right;
-        }
-
-        /* ============================================
-           RESPONSIVIDADE MOBILE
-        ============================================ */
         @media (max-width: 480px) {
-            .step-title {
-                font-size: 1.5rem;
-            }
-
-            .options-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
-
-            .option-icon {
-                font-size: 2.2rem;
-            }
-
-            .option-title {
-                font-size: 0.85rem;
-            }
-
-            .theme-toggle {
-                top: 0.5rem;
-                right: 0.5rem;
-            }
+            .options-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body data-theme="light">
-    <!-- TOGGLE DARK/LIGHT MODE -->
+
     <div class="theme-toggle">
         <button class="theme-btn active" onclick="setTheme('light')" id="lightBtn">☀️</button>
         <button class="theme-btn" onclick="setTheme('dark')" id="darkBtn">🌙</button>
     </div>
 
-    <!-- HEADER -->
     <header class="header">
-        <div class="logo">
-            <img src="clinica di mango.png" alt="Clínica Di Mango">
-        </div>
+        <img src="clinica di mango.png" alt="Clínica Di Mango">
     </header>
 
-    <!-- CONTAINER DO FUNIL -->
-    <div class="funnel-container">
-        <!-- BARRA DE PROGRESSO -->
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressBar"></div>
+    <main class="funnel-container">
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
         </div>
 
-        <!-- ============================================
-             ETAPA 2: SELEÇÃO DE CATEGORIA
-        ============================================ -->
+        <div class="step active" id="step1">
+            <h2 class="step-title">Sua saúde merece cuidado especializado.</h2>
+            <p class="step-subtitle">Assista ao vídeo abaixo para entender como transformamos vidas na Di Mango.</p>
+            <div class="video-box">
+                <span style="color:white">🎬 [Espaço para Vídeo de Apresentação]</span>
+            </div>
+            <button class="btn btn-primary" onclick="nextStep(2)">Quero agendar minha consulta →</button>
+        </div>
+
         <div class="step" id="step2">
-            <h2 class="step-title">Qual tipo de atendimento você busca?</h2>
-            <p class="step-subtitle">Selecione a categoria que melhor atende sua necessidade</p>
-
-            <div class="options-grid">
-                <div class="option-card" data-category="ortopedia" onclick="selectCategory('ortopedia')">
-                    <div class="option-icon">🩺</div>
-                    <div class="option-title">Ortopedia & Diagnóstico</div>
+            <h2 class="step-title">Como podemos ajudar?</h2>
+            <p class="step-subtitle">Escolha uma categoria de atendimento.</p>
+            <div class="options-grid" id="categoryGrid">
+                <div class="option-card" onclick="selectCategory('ortopedia')">
+                    <span class="option-icon">🩺</span>
+                    <b>Ortopedia</b>
                 </div>
-
-                <div class="option-card" data-category="fisioterapia" onclick="selectCategory('fisioterapia')">
-                    <div class="option-icon">💪</div>
-                    <div class="option-title">Fisioterapia Especializada</div>
+                <div class="option-card" onclick="selectCategory('fisioterapia')">
+                    <span class="option-icon">💪</span>
+                    <b>Fisioterapia</b>
                 </div>
-
-                <div class="option-card" data-category="terapias" onclick="selectCategory('terapias')">
-                    <div class="option-icon">🌿</div>
-                    <div class="option-title">Terapias Integrativas</div>
+                <div class="option-card" onclick="selectCategory('terapias')">
+                    <span class="option-icon">🌿</span>
+                    <b>Terapias</b>
                 </div>
-
-                <div class="option-card" data-category="homecare" onclick="selectCategory('homecare')">
-                    <div class="option-icon">🏠</div>
-                    <div class="option-title">Atendimento Domiciliar</div>
+                <div class="option-card" onclick="selectCategory('homecare')">
+                    <span class="option-icon">🏠</span>
+                    <b>Home Care</b>
                 </div>
             </div>
-
-            <button class="btn btn-back" onclick="prevStep(1)">← Voltar</button>
+            <button class="btn btn-back" onclick="prevStep(1)">Voltar</button>
         </div>
 
-        <!-- ============================================
-             ETAPA 3: ESPECIFICAÇÃO DO SERVIÇO
-        ============================================ -->
         <div class="step" id="step3">
-            <h2 class="step-title">Escolha o serviço específico</h2>
-            <p class="step-subtitle">Selecione o tratamento ideal para você</p>
-
-            <div class="options-grid" id="servicesGrid">
-                <!-- Será preenchido dinamicamente pelo JavaScript -->
-            </div>
-
-            <!-- Feedback visual -->
-            <div class="service-feedback" id="serviceFeedback">
-                <div class="service-feedback-title">✓ Benefício do Tratamento</div>
-                <div class="service-feedback-text" id="feedbackText"></div>
-            </div>
-
-            <button class="btn btn-primary" onclick="nextStep(4)" id="continueBtn3" style="display:none;">
-                Continuar →
-            </button>
-
-            <button class="btn btn-back" onclick="prevStep(2)">← Voltar</button>
+            <h2 class="step-title">Qual o tratamento?</h2>
+            <p class="step-subtitle">Selecione o serviço específico desejado.</p>
+            <div class="options-grid" id="servicesGrid"></div>
+            <button class="btn btn-back" onclick="prevStep(2)">Voltar</button>
         </div>
 
-        <!-- ============================================
-             ETAPA 4: DADOS DO PACIENTE
-        ============================================ -->
         <div class="step" id="step4">
-            <h2 class="step-title">Quase lá! 🎯</h2>
-            <p class="step-subtitle">Precisamos de algumas informações para finalizar</p>
-
+            <h2 class="step-title">Falta pouco!</h2>
+            <p class="step-subtitle">Preencha seus dados para organizarmos seu horário.</p>
             <div class="form-group">
-                <label class="form-label">Seu Nome Completo</label>
-                <input type="text" class="form-input" id="userName" placeholder="Digite seu nome completo" required>
+                <label class="form-label">Nome Completo</label>
+                <input type="text" id="userName" class="form-input" placeholder="Ex: João Silva">
             </div>
-
             <div class="form-group">
-                <label class="form-label">Dia Preferido</label>
-                <input type="date" class="form-input" id="userDate" required>
+                <label class="form-label">Data Preferida</label>
+                <input type="date" id="userDate" class="form-input">
             </div>
-
             <div class="form-group">
-                <label class="form-label">Preferência de Horário</label>
-                <select class="form-select" id="userTime">
+                <label class="form-label">Turno</label>
+                <select id="userTime" class="form-input">
+                    <option value="Manhã">Manhã (08h - 12h)</option>
                     <option value="Tarde">Tarde (13h - 18h)</option>
-                    <option value="Qualquer horário">Qualquer horário</option>
                 </select>
             </div>
-
-            <button class="btn btn-primary" onclick="nextStep(5)">Finalizar →</button>
-            <button class="btn btn-back" onclick="prevStep(3)">← Voltar</button>
+            <button class="btn btn-primary" onclick="nextStep(5)">Revisar Agendamento →</button>
+            <button class="btn btn-back" onclick="prevStep(3)">Voltar</button>
         </div>
 
-        <!-- ============================================
-             ETAPA 5: CONVERSÃO WHATSAPP
-        ============================================ -->
         <div class="step" id="step5">
-            <div class="conversion-content">
-                <div class="conversion-icon">🎉</div>
-                <h2 class="conversion-title">Tudo pronto!</h2>
-                <p class="conversion-subtitle">Confirme seus dados e finalize no WhatsApp</p>
-
-                <div class="data-summary" id="dataSummary">
-                    <!-- Será preenchido dinamicamente -->
-                </div>
-
-                <button class="btn btn-whatsapp" onclick="openWhatsApp()">
-                    📱 Confirmar Horário no WhatsApp
-                </button>
-
-                <button class="btn btn-back" onclick="prevStep(4)" style="margin-top: 1rem;">← Voltar</button>
-            </div>
+            <h2 class="step-title">Tudo Pronto! 🎉</h2>
+            <p class="step-subtitle">Confirme os dados abaixo e finalize via WhatsApp.</p>
+            <div class="summary-box" id="summaryContent"></div>
+            <button class="btn btn-whatsapp" onclick="sendWhatsApp()">
+                Finalizar no WhatsApp
+            </button>
+            <button class="btn btn-back" onclick="prevStep(4)">Corrigir informações</button>
         </div>
-    </div>
 
-    <!-- ============================================
-         JAVASCRIPT - LÓGICA DO FUNIL
-    ============================================ -->
+    </main>
+
     <script>
-        // ========== DARK/LIGHT MODE ==========
+        let currentStep = 1;
+        let data = { category: '', service: '', name: '', date: '', time: '' };
+
+        const services = {
+            ortopedia: ['Consulta Médica', 'Avaliação de Lesão', 'Raio-X'],
+            fisioterapia: ['Ortopédica', 'Respiratória', 'Geriátrica', 'Desportiva'],
+            terapias: ['Acupuntura', 'Ventosaterapia', 'Liberação Miofascial'],
+            homecare: ['Fisioterapia Domiciliar', 'Acompanhamento']
+        };
+
         function setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
+            document.getElementById('lightBtn').classList.toggle('active', theme === 'light');
+            document.getElementById('darkBtn').classList.toggle('active', theme === 'dark');
             localStorage.setItem('theme', theme);
-
-            // Atualiza botões
-            document.getElementById('lightBtn').classList.remove('active');
-            document.getElementById('darkBtn').classList.remove('active');
-
-            if (theme === 'light') {
-                document.getElementById('lightBtn').classList.add('active');
-            } else {
-                document.getElementById('darkBtn').classList.add('active');
-            }
         }
 
-        // Carrega tema salvo
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            setTheme(savedTheme);
-        });
+        function updateProgress() {
+            const percent = ((currentStep - 1) / 4) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+        }
 
-        // ========== ESTADO GLOBAL ==========
-        let funnelData = {
-            category: '',
-            service: '',
-            name: '',
-            date: '',
-            time: ''
-        };
-
-        const progressSteps = [20, 40, 60, 80, 100];
-
-        // ========== DADOS DOS SERVIÇOS ==========
-        const servicesData = {
-            ortopedia: [
-                { name: 'Consulta Médica', icon: '🩺', benefit: 'Avaliação completa com médico ortopedista especializado' },
-                { name: 'Raio X', icon: '📸', benefit: 'Exame de imagem para diagnóstico preciso e rápido' }
-            ],
-            fisioterapia: [
-                { name: 'Respiratória', icon: '🫁', benefit: 'Melhora da capacidade pulmonar e função respiratória' },
-                { name: 'Ortopédica', icon: '🦴', benefit: 'Foco no alívio imediato de dores musculares e articulares' },
-                { name: 'Desportiva', icon: '⚽', benefit: 'Recuperação acelerada e prevenção de lesões em atletas' },
-                { name: 'Geriátrica', icon: '👴', benefit: 'Mais mobilidade e qualidade de vida para idosos' },
-                { name: 'Neurológica', icon: '🧠', benefit: 'Recuperação de funções motoras e cognitivas' },
-                { name: 'Amputados', icon: '🦿', benefit: 'Reabilitação e adaptação funcional especializada' }
-            ],
-            terapias: [
-                { name: 'Auriculoterapia', icon: '👂', benefit: 'Estimulação de pontos reflexos para equilíbrio energético' },
-                { name: 'Acupuntura', icon: '📌', benefit: 'Alívio de dores crônicas e reequilíbrio do corpo' },
-                { name: 'Ventosoterapia', icon: '⭕', benefit: 'Melhora a circulação sanguínea e relaxamento muscular profundo' },
-                { name: 'Liberação Miofascial', icon: '✋', benefit: 'Soltura muscular profunda para alívio de tensões' },
-                { name: 'Drenagem Linfática', icon: '💧', benefit: 'Redução de inchaço e eliminação de toxinas' }
-            ],
-            homecare: [
-                { name: 'Atendimento Domiciliar', icon: '🏡', benefit: 'O cuidado da clínica no conforto e segurança do seu lar' }
-            ]
-        };
-
-        // ========== NAVEGAÇÃO ENTRE ETAPAS ==========
-        function nextStep(stepNumber) {
-            // Validações específicas
-            if (stepNumber === 4 && !funnelData.service) {
-                alert('Por favor, selecione um serviço antes de continuar.');
-                return;
-            }
-
-            if (stepNumber === 5) {
-                const name = document.getElementById('userName').value.trim();
-                const date = document.getElementById('userDate').value;
-                const time = document.getElementById('userTime').value;
-
-                if (!name) {
-                    alert('Por favor, preencha seu nome completo.');
-                    return;
-                }
-
-                if (!date) {
-                    alert('Por favor, selecione o dia preferido.');
-                    return;
-                }
-
-                funnelData.name = name;
-                funnelData.date = date;
-                funnelData.time = time;
+        function nextStep(step) {
+            if(step === 5) {
+                if(!document.getElementById('userName').value) return alert('Por favor, digite seu nome');
+                data.name = document.getElementById('userName').value;
+                data.date = document.getElementById('userDate').value;
+                data.time = document.getElementById('userTime').value;
                 renderSummary();
             }
-
-            changeStep(stepNumber);
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            currentStep = step;
+            updateProgress();
+            window.scrollTo(0,0);
         }
 
-        function prevStep(stepNumber) {
-            changeStep(stepNumber);
+        function prevStep(step) {
+            nextStep(step);
         }
 
-        function changeStep(stepNumber) {
-            // Remove active de todas as etapas
-            document.querySelectorAll('.step').forEach(step => {
-                step.classList.remove('active');
-            });
-
-            // Ativa a nova etapa
-            document.getElementById(`step${stepNumber}`).classList.add('active');
-
-            // Atualiza barra de progresso
-            document.getElementById('progressBar').style.width = progressSteps[stepNumber - 1] + '%';
-
-            // Scroll suave para o topo
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ========== SELEÇÃO DE CATEGORIA ==========
-        function selectCategory(category) {
-            funnelData.category = category;
-
-            // Remove seleção anterior
-            document.querySelectorAll('#step2 .option-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-
-            // Adiciona seleção na categoria clicada
-            document.querySelector(`[data-category="${category}"]`).classList.add('selected');
-
-            // Carrega serviços da categoria
-            loadServices(category);
-
-            // Avança automaticamente após 500ms
-            setTimeout(() => nextStep(3), 500);
-        }
-
-        // ========== CARREGAMENTO DE SERVIÇOS ==========
-        function loadServices(category) {
-            const servicesGrid = document.getElementById('servicesGrid');
-            const services = servicesData[category];
-
-            servicesGrid.innerHTML = '';
-
-            services.forEach(service => {
-                const card = document.createElement('div');
-                card.className = 'option-card';
-                card.onclick = () => selectService(service.name, service.benefit);
-                card.innerHTML = `
-                    <div class="option-icon">${service.icon}</div>
-                    <div class="option-title">${service.name}</div>
+        function selectCategory(cat) {
+            data.category = cat;
+            const grid = document.getElementById('servicesGrid');
+            grid.innerHTML = '';
+            services[cat].forEach(s => {
+                grid.innerHTML += `
+                    <div class="option-card" onclick="selectService('${s}')">
+                        <b>${s}</b>
+                    </div>
                 `;
-                servicesGrid.appendChild(card);
             });
+            nextStep(3);
         }
 
-        // ========== SELEÇÃO DE SERVIÇO ==========
-        function selectService(serviceName, benefit) {
-            funnelData.service = serviceName;
-
-            // Remove seleção anterior
-            document.querySelectorAll('#step3 .option-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-
-            // Adiciona seleção
-            event.target.closest('.option-card').classList.add('selected');
-
-            // Mostra feedback visual
-            document.getElementById('feedbackText').textContent = benefit;
-            document.getElementById('serviceFeedback').classList.add('show');
-            document.getElementById('continueBtn3').style.display = 'flex';
+        function selectService(srv) {
+            data.service = srv;
+            nextStep(4);
         }
 
-        // ========== RENDERIZAR RESUMO ==========
         function renderSummary() {
-            const summary = document.getElementById('dataSummary');
-
-            // Formatar data para melhor exibição
-            const dateFormatted = new Date(funnelData.date).toLocaleDateString('pt-BR');
-
-            summary.innerHTML = `
-                <div class="data-row">
-                    <span class="data-label">👤 Paciente:</span>
-                    <span class="data-value">${funnelData.name}</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">🩺 Serviço:</span>
-                    <span class="data-value">${funnelData.service}</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">📅 Dia:</span>
-                    <span class="data-value">${dateFormatted}</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">🕒 Horário:</span>
-                    <span class="data-value">${funnelData.time}</span>
-                </div>
+            const date = new Date(data.date).toLocaleDateString('pt-BR');
+            document.getElementById('summaryContent').innerHTML = `
+                <div class="summary-item"><span>Paciente:</span> <b>${data.name}</b></div>
+                <div class="summary-item"><span>Serviço:</span> <b>${data.service}</b></div>
+                <div class="summary-item"><span>Data:</span> <b>${date}</b></div>
+                <div class="summary-item"><span>Turno:</span> <b>${data.time}</b></div>
             `;
         }
 
-        // ========== ABRIR WHATSAPP ==========
-        function openWhatsApp() {
-            // ⚠️ SUBSTITUA PELO NÚMERO REAL DA CLÍNICA (formato: 5521999999999)
-            const phoneNumber = "5521967027021";
-
-            // Formatar data para a mensagem
-            const dateFormatted = new Date(funnelData.date).toLocaleDateString('pt-BR');
-
-            const message = `Olá! Vim pelo site da *Clínica Di Mango*
-            
-*Paciente:* ${funnelData.name}
-*Serviço:* ${funnelData.service}
-*Data Preferida:* ${dateFormatted}
-*Horário:* ${funnelData.time}
-
-Gostaria de verificar a disponibilidade para agendamento. Obrigado!`;
-
-            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        function sendWhatsApp() {
+            const phone = "5521967027021";
+            const text = `Olá! Gostaria de confirmar um agendamento:\n\n*Nome:* ${data.name}\n*Serviço:* ${data.service}\n*Data:* ${data.date}\n*Turno:* ${data.time}`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`);
         }
+
+        // Inicialização
+        window.onload = () => {
+            setTheme(localStorage.getItem('theme') || 'light');
+            updateProgress();
+        };
     </script>
 </body>
-
 </html>
